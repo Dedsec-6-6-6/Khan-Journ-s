@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khan Journ's | Handcrafted Bookmarks, Journals & Cozy Crafts</title>
+    
+    <!-- 🌸 FAVICON SECTION 🌸 -->
+    <!-- Replace 'my-image.png' with your image's file name (e.g., logo.png, favicon.ico) or direct URL -->
+    <link rel="icon" type="image/png" href="images/favicon.jpg">
+    <link rel="apple-touch-icon" href="my-image.png">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blush: {
+                            50: '#fff5f7',
+                            100: '#ffe6ec',
+                            200: '#ffd0dc',
+                            300: '#ffa7bd',
+                            400: '#fe7499',
+                            500: '#f74676',
+                            600: '#e3255c',
+                        },
+                        petal: '#FDECEF',
+                        cream: '#FDFBF7',
+                        parchment: '#F6EFEB',
+                        lavender: {
+                            50: '#F9F5FF',
+                            100: '#F3EBF9',
+                            200: '#E6D7F3',
+                            300: '#CEB2E8',
+                        },
+                        sage: '#E3EAD8',
+                        warmgray: '#4A403A'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        handwriting: ['"Caveat"', 'cursive'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'craft': '0 8px 30px -4px rgba(227, 37, 92, 0.08), 0 4px 12px rgba(0,0,0,0.04)',
+                        'polaroid': '0 10px 25px -5px rgba(120, 80, 80, 0.12), 0 8px 10px -6px rgba(0,0,0,0.05)',
+                        'pin': '0 4px 14px rgba(247, 70, 118, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Aesthetic scrapbooking & washi tape accents */
+        .washi-tape-pink {
+            background: rgba(255, 182, 193, 0.65);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transform: rotate(-2deg);
+        }
+        .washi-tape-lavender {
+            background: rgba(216, 191, 216, 0.7);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transform: rotate(2.5deg);
+        }
+        .washi-tape-cream {
+            background: rgba(245, 235, 215, 0.75);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transform: rotate(-1.5deg);
+        }
+        .paper-texture {
+            background-color: #FAF6F0;
+            background-image: radial-gradient(#e8ded2 0.75px, transparent 0.75px);
+            background-size: 16px 16px;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF6F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ffd0dc;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #fe7499;
+        }
+
+        /* Typewriter blinking cursor */
+        .cursor-blink {
+            display: inline-block;
+            margin-left: 2px;
+            width: 3px;
+            animation: blink 0.8s infinite;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Hero gentle float animation */
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px) rotate(-2deg); }
+            50% { transform: translateY(-8px) rotate(-1deg); }
+        }
+        .animate-float {
+            animation: gentleFloat 5s ease-in-out infinite;
+        }
+
+        /* Subtle falling floral confetti effect */
+        .petal-particle {
+            position: fixed;
+            top: -20px;
+            user-select: none;
+            pointer-events: none;
+            z-index: 999;
+            animation: fallDown linear forwards;
+        }
+        @keyframes fallDown {
+            to {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="paper-texture text-warmgray font-sans antialiased selection:bg-blush-200 selection:text-blush-600 min-h-screen relative overflow-x-hidden">
+
+    <!-- Sweet First-Time Visitor Welcome Modal -->
+    <div id="entranceModal" class="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-500 opacity-100">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 sm:p-8 text-center border-2 border-blush-200 shadow-2xl relative transform transition-all duration-500 scale-100">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 washi-tape-pink w-28 h-6 rounded-sm"></div>
+            <div class="w-16 h-16 rounded-full bg-blush-100 text-blush-500 flex items-center justify-center mx-auto mb-4 text-2xl shadow-inner animate-bounce">
+                🌸
+            </div>
+            <span class="text-[11px] font-bold uppercase tracking-widest text-blush-500 bg-blush-50 px-3 py-1 rounded-full border border-blush-200">
+                📍 Exclusive to Mumbai
+            </span>
+            <h3 class="font-serif text-2xl font-bold text-gray-800 mt-3">Welcome to Khan Journ's</h3>
+            <p class="text-xs sm:text-sm text-gray-600 mt-2 leading-relaxed">
+                Handcrafted with love for Mumbai book lovers! Hand-poured resin bookmarks, vintage journals & aesthetic handmade keepsakes.
+            </p>
+            <div class="mt-4 p-2.5 rounded-xl bg-petal/50 border border-blush-100 text-xs text-gray-600 flex items-center justify-center gap-1.5 font-medium">
+                <i data-lucide="map-pin" class="w-4 h-4 text-blush-500"></i>
+                <span>Local Deliveries across Mumbai, Navi Mumbai & Thane</span>
+            </div>
+            <button onclick="dismissEntranceModal()" class="mt-5 w-full py-3 px-5 rounded-2xl bg-gradient-to-r from-blush-400 to-blush-500 hover:from-blush-500 hover:to-blush-600 text-white font-semibold text-xs sm:text-sm shadow-pin transition-all transform hover:scale-[1.02] active:scale-95">
+                Explore The Studio ✨
+            </button>
+        </div>
+    </div>
+
+    <!-- Top Decorative Announcement Strip (Mumbai Focused) -->
+    <div class="bg-gradient-to-r from-blush-100 via-petal to-lavender-100 text-xs text-center py-2 px-4 border-b border-blush-200/50 flex items-center justify-center gap-2 font-medium tracking-wide">
+        <span class="inline-block animate-pulse">🌸</span>
+        <span>Crafted with love &bull; <strong>Mumbai Exclusive Delivery</strong> (South Bombay to Thane & Suburbs)</span>
+        <span class="inline-block animate-pulse">📍</span>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-pink-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-2 sm:gap-3 group">
+                <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-blush-100 border border-blush-200 flex items-center justify-center text-blush-500 shadow-sm transition-transform duration-300 group-hover:rotate-12 shrink-0">
+                    <i data-lucide="bookmark" class="w-4 h-4 sm:w-5 sm:h-5 fill-blush-300"></i>
+                </div>
+                <div>
+                    <h1 class="font-serif text-lg sm:text-2xl font-bold tracking-tight text-gray-800">
+                        Khan Journ<span class="text-blush-500 font-normal">'s</span>
+                    </h1>
+                    <p class="font-handwriting text-xs sm:text-sm text-blush-500 -mt-0.5 tracking-wide">cozy handcrafted treasures</p>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-gray-600">
+                <a href="#gallery" class="hover:text-blush-500 transition-colors flex items-center gap-1.5">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-blush-400"></i> Gallery
+                </a>
+                <a href="#process" class="hover:text-blush-500 transition-colors flex items-center gap-1.5">
+                    <i data-lucide="heart-handshake" class="w-4 h-4 text-blush-400"></i> How It Works
+                </a>
+                <a href="#reviews" class="hover:text-blush-500 transition-colors flex items-center gap-1.5">
+                    <i data-lucide="message-circle-heart" class="w-4 h-4 text-blush-400"></i> Mumbai Love Notes
+                </a>
+                <a href="#inquiry" class="hover:text-blush-500 transition-colors flex items-center gap-1.5">
+                    <i data-lucide="pen-tool" class="w-4 h-4 text-blush-400"></i> Custom Enquiry
+                </a>
+            </nav>
+
+            <!-- Action buttons & Mobile Hamburger Toggle -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <a href="tel:+917977339727" class="hidden sm:inline-flex items-center gap-2 text-xs font-semibold px-3 py-2 rounded-full border border-blush-200 text-gray-700 hover:bg-blush-50 transition-colors">
+                    <i data-lucide="phone" class="w-3.5 h-3.5 text-blush-500"></i>
+                    <span>+91 7977339727</span>
+                </a>
+                
+                <!-- Order CTA button -->
+                <a href="#inquiry" class="inline-flex items-center gap-1.5 bg-gradient-to-r from-blush-400 to-blush-500 hover:from-blush-500 hover:to-blush-600 text-white text-[11px] sm:text-sm font-semibold px-3 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-pin shadow-blush-200 transition-all shrink-0">
+                    <i data-lucide="sparkle" class="w-3.5 h-3.5"></i>
+                    <span class="hidden xs:inline sm:inline">Order in Mumbai</span>
+                    <span class="inline xs:hidden sm:hidden">Order</span>
+                </a>
+
+                <!-- Mobile Hamburger Button -->
+                <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Toggle Navigation Menu" class="md:hidden w-9 h-9 rounded-full bg-blush-50 border border-blush-200 flex items-center justify-center text-blush-600 hover:bg-blush-100 transition-colors focus:outline-none shrink-0">
+                    <i id="hamburgerIcon" data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Navigation Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white/95 backdrop-blur-md border-b border-pink-100 px-4 pt-3 pb-6 shadow-xl transition-all duration-300">
+            <div class="flex flex-col space-y-2">
+                <a href="#gallery" onclick="closeMobileMenu()" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-700 hover:bg-blush-50 hover:text-blush-600 transition-colors">
+                    <div class="w-8 h-8 rounded-full bg-blush-100 flex items-center justify-center text-blush-500">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    </div>
+                    <span>Explore Gallery</span>
+                </a>
+
+                <a href="#process" onclick="closeMobileMenu()" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-700 hover:bg-blush-50 hover:text-blush-600 transition-colors">
+                    <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                        <i data-lucide="heart-handshake" class="w-4 h-4"></i>
+                    </div>
+                    <span>How Custom Orders Work</span>
+                </a>
+
+                <a href="#reviews" onclick="closeMobileMenu()" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-700 hover:bg-blush-50 hover:text-blush-600 transition-colors">
+                    <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-600">
+                        <i data-lucide="message-circle-heart" class="w-4 h-4"></i>
+                    </div>
+                    <span>Mumbai Love Notes</span>
+                </a>
+
+                <a href="#inquiry" onclick="closeMobileMenu()" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-700 hover:bg-blush-50 hover:text-blush-600 transition-colors">
+                    <div class="w-8 h-8 rounded-full bg-rose-100 flex items-center justify-center text-rose-500">
+                        <i data-lucide="pen-tool" class="w-4 h-4"></i>
+                    </div>
+                    <span>Custom Mumbai Inquiry Form</span>
+                </a>
+            </div>
+
+            <!-- Mobile Quick Contact Section -->
+            <div class="mt-4 pt-4 border-t border-pink-100 grid grid-cols-2 gap-2">
+                <a href="tel:+917977339727" class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-petal/60 border border-blush-200 text-gray-700 text-xs font-semibold hover:bg-blush-100 transition-colors">
+                    <i data-lucide="phone" class="w-3.5 h-3.5 text-blush-500"></i>
+                    <span>Call Studio</span>
+                </a>
+                <a href="https://wa.me/917977339727?text=Hi%20Khan%20Journ's!%20I%20am%20from%20Mumbai%20and%20would%20love%20to%20place%20an%20enquiry." target="_blank" class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
+                    <i data-lucide="message-circle" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span>WhatsApp</span>
+                </a>
+            </div>
+            <p class="text-[11px] text-gray-400 text-center mt-3 font-medium">📍 Serving readers & gift makers across Mumbai area</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="relative overflow-hidden pt-12 pb-20 lg:pt-16 lg:pb-28">
+            <!-- Decorative background elements -->
+            <div class="absolute top-12 left-10 w-64 h-64 bg-blush-200/40 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+            <div class="absolute bottom-10 right-10 w-72 h-72 bg-lavender-200/40 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left Hero Content -->
+                    <div class="lg:col-span-7 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-blush-200 shadow-sm mb-6">
+                            <span class="w-2 h-2 rounded-full bg-blush-500 animate-ping"></span>
+                            <span class="font-handwriting text-lg text-blush-600 font-semibold">📍 Handcrafted exclusively for Mumbai</span>
+                        </div>
+
+                        <!-- Main Heading with Dynamic Typewriter Effect -->
+                        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-gray-800 leading-tight">
+                            Custom Bookmarks & <br>
+                            <span class="relative inline-block italic text-blush-500">
+                                <span id="typewriterText">Handmade Keepsakes</span><span class="cursor-blink bg-blush-500 h-8 sm:h-11"></span>
+                                <svg class="absolute -bottom-2 left-0 w-full h-3 text-blush-300 fill-current -z-10 opacity-70" viewBox="0 0 100 20" preserveAspectRatio="none">
+                                    <path d="M0,10 Q50,0 100,10 Q50,20 0,10 Z"></path>
+                                </svg>
+                            </span>
+                        </h2>
+
+                        <p class="mt-6 text-base sm:text-lg text-gray-600 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
+                            Welcome to <strong class="text-gray-800 font-semibold">Khan Journ's</strong>! Made with pressed petals, resin, and vintage papers. We craft dreamy personalized bookmarks and scrapbooks, <strong>delivered only across the Mumbai region</strong> (Bandra, Andheri, SoBo, Powai, Thane & beyond).
+                        </p>
+
+                        <!-- Quick CTA Buttons -->
+                        <div class="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-4">
+                            <a href="#gallery" class="px-7 py-3.5 rounded-full bg-gray-900 text-white font-medium text-sm hover:bg-gray-800 shadow-lg shadow-gray-300 transition-all flex items-center gap-2 transform hover:-translate-y-0.5">
+                                <i data-lucide="eye" class="w-4 h-4 text-blush-300"></i>
+                                Browse The Collection
+                            </a>
+                            <a href="#inquiry" class="px-7 py-3.5 rounded-full bg-white border border-blush-200 text-gray-800 font-medium text-sm hover:bg-blush-50 shadow-sm transition-all flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-blush-500"></i>
+                                Request Mumbai Order
+                            </a>
+                        </div>
+
+                        <!-- Direct Contact Pill (Mumbai Exclusivity) -->
+                        <div class="mt-8 pt-6 border-t border-pink-100/80 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-gray-500">
+                            <div class="flex items-center gap-2">
+                                <span class="p-1 rounded-full bg-emerald-100 text-emerald-600">
+                                    <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                                </span>
+                                <span>Fast Hand-Delivery / Courier in Mumbai</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="p-1 rounded-full bg-blush-100 text-blush-600">
+                                    <i data-lucide="heart" class="w-3.5 h-3.5 fill-current"></i>
+                                </span>
+                                <span>Personalized names & quotes</span>
+                            </div>
+                            <a href="https://wa.me/917977339727?text=Hi%20Khan%20Journ's!%20I%20am%20from%20Mumbai%20and%20would%20love%20to%20order%20a%20custom%20bookmark." target="_blank" class="flex items-center gap-1.5 text-blush-600 font-semibold hover:underline">
+                                <i data-lucide="phone-call" class="w-3.5 h-3.5"></i> WhatsApp: +91 7977339727
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Scrapbook / Polaroid Visual Collage with Float Animation -->
+                    <div class="lg:col-span-5 relative flex justify-center items-center">
+                        <!-- Pinned main polaroid -->
+                        <div class="relative w-80 sm:w-96 bg-white p-3.5 rounded-2xl shadow-polaroid animate-float transition-transform duration-500 z-20">
+                            <!-- Washi tape top -->
+                            <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-28 h-6 washi-tape-pink rounded-sm z-30"></div>
+                            
+                            <div class="overflow-hidden rounded-xl aspect-[16/10] bg-stone-950 relative group flex items-center justify-center">
+                                <img src="images/1.png" 
+                                     alt="Vintage Butterfly & Floral Bookmarks" 
+                                     class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+                                     onerror="this.src='https://placehold.co/600x375/1a1a1a/ffe6ec?text=Vintage+Floral+Bookmarks'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+                                    <span class="text-white text-xs font-medium">Handmade Collage & Ribbon Bookmarks</span>
+                                </div>
+                            </div>
+                            <div class="pt-3.5 pb-1 px-1 flex justify-between items-center">
+                                <div>
+                                    <p class="font-handwriting text-xl text-gray-800">Floral & Affirmation Series</p>
+                                    <p class="text-[11px] text-gray-400">Handmade in Mumbai &bull; Silk Ribbons</p>
+                                </div>
+                                <span class="bg-blush-100 text-blush-600 text-xs font-semibold px-2.5 py-1 rounded-full">Mumbai Made</span>
+                            </div>
+                        </div>
+
+                        <!-- Secondary rotated polaroid background -->
+                        <div class="absolute -bottom-8 -left-4 sm:-left-6 w-64 sm:w-72 bg-white p-3 rounded-2xl shadow-craft transform rotate-6 hover:rotate-3 transition-transform duration-500 z-10 hidden sm:block">
+                            <div class="absolute -top-3 left-6 w-20 h-5 washi-tape-lavender rounded-sm z-30"></div>
+                            <div class="aspect-[16/10] rounded-xl overflow-hidden bg-stone-950 flex items-center justify-center">
+                                <img src="images/6.png" 
+                                     alt="Anime & Superheroes Series" 
+                                     class="w-full h-full object-contain"
+                                     onerror="this.src='https://placehold.co/500x312/1a1a1a/f3ebf9?text=Anime+Bookmarks'">
+                            </div>
+                            <p class="font-handwriting text-lg text-gray-700 text-center pt-2">Anime & Pop Culture Series</p>
+                        </div>
+
+                        <!-- Floating cute badge -->
+                        <div class="absolute -top-4 -right-2 bg-white/95 backdrop-blur border border-blush-200 p-3 rounded-2xl shadow-lg z-30 flex items-center gap-2.5 animate-bounce" style="animation-duration: 4s;">
+                            <div class="w-8 h-8 rounded-full bg-blush-100 flex items-center justify-center text-blush-500">
+                                <i data-lucide="flower2" class="w-4 h-4"></i>
+                            </div>
+                            <div class="text-left">
+                                <p class="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Local Mumbai</p>
+                                <p class="text-xs font-bold text-gray-800">Direct Delivery 🌸</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="py-16 bg-white/60 border-y border-pink-100/70 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Heading -->
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="inline-block text-blush-500 font-handwriting text-2xl font-bold tracking-wide">
+                        Pin-Worthy Collection
+                    </span>
+                    <h2 class="font-serif text-3xl sm:text-4xl text-gray-800 mt-1">Explore The Craft Board</h2>
+                    <p class="text-sm sm:text-base text-gray-500 mt-2">
+                        Serving readers and dreamers across <strong>Mumbai city</strong>. Click any creation to customize or order via WhatsApp!
+                    </p>
+
+                    <!-- Filter Tags -->
+                    <div class="mt-7 flex flex-wrap justify-center gap-2 text-xs font-semibold" id="categoryFilters">
+                        <button onclick="filterGallery('all')" class="filter-btn active-filter px-4 py-2 rounded-full transition-all border border-blush-400 bg-blush-400 text-white shadow-sm" data-category="all">
+                            ✨ All Creations
+                        </button>
+                        <button onclick="filterGallery('bookmarks')" class="filter-btn px-4 py-2 rounded-full transition-all border border-pink-200 bg-white text-gray-600 hover:border-blush-300" data-category="bookmarks">
+                            🔖 Pressed Floral Bookmarks
+                        </button>
+                        <button onclick="filterGallery('journals')" class="filter-btn px-4 py-2 rounded-full transition-all border border-pink-200 bg-white text-gray-600 hover:border-blush-300" data-category="journals">
+                            📖 Vintage Journals
+                        </button>
+                        <button onclick="filterGallery('charms')" class="filter-btn px-4 py-2 rounded-full transition-all border border-pink-200 bg-white text-gray-600 hover:border-blush-300" data-category="charms">
+                            ✨ Resin Charms & Clips
+                        </button>
+                        <button onclick="filterGallery('gifts')" class="filter-btn px-4 py-2 rounded-full transition-all border border-pink-200 bg-white text-gray-600 hover:border-blush-300" data-category="gifts">
+                            🎁 Aesthetic Gift Hampers
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pinterest Masonry Grid Container -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start" id="craftGallery">
+                    <!-- Cards will be populated by JavaScript dynamically with like interactions and modal hooks -->
+                </div>
+
+                <div class="mt-12 text-center">
+                    <p class="text-xs text-gray-500 font-medium">Have an entirely original design in your mind?</p>
+                    <a href="#inquiry" class="inline-flex items-center gap-1.5 mt-2 text-sm text-blush-600 hover:text-blush-700 font-semibold underline decoration-blush-300 decoration-2 underline-offset-4">
+                        Share your custom craft idea with Khan Journ's &rarr;
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="process" class="py-20 relative">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14">
+                    <span class="font-handwriting text-2xl text-blush-500 font-bold">Simple & Thoughtful</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl text-gray-800 mt-1">How Custom Orders Work</h2>
+                    <p class="text-sm text-gray-500 mt-2">Every creation is lovingly handcrafted specifically for your moments.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                    <!-- Step 1 -->
+                    <div class="bg-white p-7 rounded-3xl border border-blush-100 shadow-craft relative group hover:-translate-y-1 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-2xl bg-blush-100 text-blush-500 flex items-center justify-center font-serif text-xl font-bold mb-5 group-hover:scale-110 transition-transform">
+                            01
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-gray-800">Dream & Enquire</h3>
+                        <p class="text-sm text-gray-600 mt-2 leading-relaxed">
+                            Pick an inspiration, choose your pressed floral palette, or tell us your favorite book quote and recipient name.
+                        </p>
+                        <div class="mt-4 pt-3 border-t border-pink-50 flex items-center gap-1 text-xs text-blush-600 font-medium">
+                            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Custom colors & initials
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="bg-white p-7 rounded-3xl border border-blush-100 shadow-craft relative group hover:-translate-y-1 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-2xl bg-lavender-100 text-purple-600 flex items-center justify-center font-serif text-xl font-bold mb-5 group-hover:scale-110 transition-transform">
+                            02
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-gray-800">Handcrafted with Care</h3>
+                        <p class="text-sm text-gray-600 mt-2 leading-relaxed">
+                            Natural petals are gently dried, pressed, encased in UV crystal resin or bound by hand with vintage paper and silk tassels.
+                        </p>
+                        <div class="mt-4 pt-3 border-t border-purple-50 flex items-center gap-1 text-xs text-purple-600 font-medium">
+                            <i data-lucide="heart" class="w-3.5 h-3.5"></i> 2 - 4 days crafting time
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="bg-white p-7 rounded-3xl border border-blush-100 shadow-craft relative group hover:-translate-y-1 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center font-serif text-xl font-bold mb-5 group-hover:scale-110 transition-transform">
+                            03
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-gray-800">Delivered Across Mumbai</h3>
+                        <p class="text-sm text-gray-600 mt-2 leading-relaxed">
+                            Packaged in aesthetic vintage envelopes with wax seal stamp, promptly delivered to any Mumbai doorstep via quick local delivery.
+                        </p>
+                        <div class="mt-4 pt-3 border-t border-amber-50 flex items-center gap-1 text-xs text-amber-600 font-medium">
+                            <i data-lucide="package-check" class="w-3.5 h-3.5"></i> Mumbai, Navi Mumbai & Thane only
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call to action badge -->
+                <div class="mt-12 bg-gradient-to-r from-blush-50 via-petal to-lavender-50 rounded-2xl p-6 border border-blush-200/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-blush-500 text-white flex items-center justify-center shadow-sm">
+                            <i data-lucide="map-pin" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-gray-800">Need a quick birthday gift or book lover hamper in Mumbai?</p>
+                            <p class="text-xs text-gray-500">Call or chat directly with us on +91 7977339727</p>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/917977339727?text=Hi%20Khan%20Journ's,%20I%20have%20an%20urgent%20Mumbai%20custom%20order%20enquiry!" target="_blank" class="px-5 py-2.5 rounded-full bg-white hover:bg-gray-50 border border-blush-300 text-blush-600 text-xs font-bold transition-all shadow-sm flex items-center gap-1.5">
+                        <i data-lucide="message-square" class="w-4 h-4"></i> Chat on WhatsApp
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="inquiry" class="py-20 bg-white/80 border-t border-pink-100 relative">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="bg-petal/40 rounded-3xl p-6 sm:p-10 border border-blush-200 shadow-craft relative">
+                    <!-- Cute Scrapbook pin decoration -->
+                    <div class="absolute -top-4 left-10 w-9 h-9 rounded-full bg-blush-400 border-2 border-white shadow-pin flex items-center justify-center text-white">
+                        <i data-lucide="pin" class="w-4 h-4"></i>
+                    </div>
+
+                    <div class="text-center max-w-xl mx-auto mb-8">
+                        <span class="font-handwriting text-2xl text-blush-600 font-bold">Mumbai Orders Only</span>
+                        <h2 class="font-serif text-3xl font-bold text-gray-800 mt-1">Custom Craft & Bookmark Enquiry</h2>
+                        <p class="text-xs sm:text-sm text-gray-600 mt-2">
+                            We currently cater <strong>exclusively to Mumbai & nearby areas</strong>! Fill in your ideas below to connect with us directly on WhatsApp at 
+                            <strong class="text-gray-800">+91 7977339727</strong>.
+                        </p>
+                    </div>
+
+                    <form id="orderForm" onsubmit="handleInquirySubmit(event)" class="space-y-6">
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <!-- Craft Type -->
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
+                                    Craft You Want Made <span class="text-blush-500">*</span>
+                                </label>
+                                <select id="craftType" required class="w-full px-4 py-3 rounded-xl border border-pink-200 bg-white text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blush-300 focus:border-transparent transition-all">
+                                    <option value="Pressed Floral Resin Bookmark">🌸 Pressed Floral Resin Bookmark</option>
+                                    <option value="Vintage Calligraphy Journal">📖 Vintage Calligraphy Journal</option>
+                                    <option value="Custom Name / Quote Acrylic Bookmark">✨ Custom Name / Quote Bookmark</option>
+                                    <option value="Resin Charm & Page Divider">🎀 Resin Charm & Page Divider</option>
+                                    <option value="Curated Bookish Gift Hamper">🎁 Curated Bookish Gift Hamper</option>
+                                    <option value="Other Custom Craft Idea">💭 Other Creative Idea</option>
+                                </select>
+                            </div>
+
+                            <!-- Color Palette & Florals -->
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
+                                    Preferred Colors / Flower Theme
+                                </label>
+                                <input type="text" id="colorTheme" placeholder="e.g. Blush Pink, Lavenders, Baby's Breath & Gold Foil" class="w-full px-4 py-3 rounded-xl border border-pink-200 bg-white text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blush-300 focus:border-transparent transition-all">
+                            </div>
+                        </div>
+
+                        <!-- Personalization: Name or Quotes -->
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
+                                Personalization (Name, Initial, or Short Quote)
+                            </label>
+                            <input type="text" id="personalizationText" placeholder="e.g. 'Ayesha', 'Between the pages of a book...', or special date" class="w-full px-4 py-3 rounded-xl border border-pink-200 bg-white text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blush-300 focus:border-transparent transition-all">
+                            <span class="text-[11px] text-gray-500 mt-1 block">We can write this in vintage gold or black cursive calligraphy.</span>
+                        </div>
+
+                        <!-- Mumbai Location selector -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
+                                    Your Mumbai Locality / Area <span class="text-blush-500">*</span>
+                                </label>
+                                <input type="text" id="custArea" required placeholder="e.g. Bandra West, Andheri, Colaba, Thane, Powai" class="w-full px-4 py-3 rounded-xl border border-pink-200 bg-white text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blush-300 focus:border-transparent transition-all">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
+                                    Needed By Date (Optional)
+                                </label>
+                                <input type="text" id="deliveryTimeline" placeholder="e.g. Within this weekend, or 25th Oct" class="w-full px-4 py-3 rounded-xl border border-pink-200 bg-white text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blush-300 focus:border-transparent transition-all">
+                            </div>
+                        </div>
+
+                        <!-- Extra details / Notes -->
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
+                                Special Notes & Preferences
+                            </label>
+                            <textarea id="orderNotes" rows="3" placeholder="Tell us if it's for a birthday, anniversary gift, need a tassel color choice..." class="w-full px-4 py-3 rounded-xl border border-pink-200 bg-white text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blush-300 focus:border-transparent transition-all"></textarea>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
+                            <!-- Customer Name -->
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
+                                    Your Name <span class="text-blush-500">*</span>
+                                </label>
+                                <input type="text" id="custName" required placeholder="e.g. Sanya" class="w-full px-4 py-3 rounded-xl border border-pink-200 bg-white text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blush-300 focus:border-transparent transition-all">
+                            </div>
+
+                            <!-- Phone / WhatsApp -->
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
+                                    Your WhatsApp Number <span class="text-blush-500">*</span>
+                                </label>
+                                <input type="tel" id="custPhone" required placeholder="e.g. +91 9876543210" class="w-full px-4 py-3 rounded-xl border border-pink-200 bg-white text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blush-300 focus:border-transparent transition-all">
+                            </div>
+                        </div>
+
+                        <!-- Buttons & direct WhatsApp trigger -->
+                        <div class="pt-4 flex flex-col sm:flex-row items-center gap-4">
+                            <button type="submit" class="w-full sm:flex-1 py-4 px-6 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold text-sm shadow-md transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
+                                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                                Send Custom Enquiry via WhatsApp
+                            </button>
+                            <button type="button" onclick="previewAndConfirmModal()" class="w-full sm:w-auto py-4 px-6 rounded-2xl bg-white border border-blush-200 text-gray-700 hover:bg-blush-50 font-semibold text-sm transition-all flex items-center justify-center gap-2">
+                                <i data-lucide="eye" class="w-4 h-4 text-blush-500"></i>
+                                Review Summary
+                            </button>
+                        </div>
+
+                        <div class="text-center text-xs text-gray-500 flex items-center justify-center gap-2">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-blush-500"></i>
+                            <span>Delivering exclusively across <strong>Mumbai & nearby regions</strong> &bull; Contact: <strong>+91 7977339727</strong></span>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="reviews" class="py-20 relative overflow-hidden">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14">
+                    <span class="font-handwriting text-2xl text-blush-500 font-bold">Happy Mumbai Readers</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl text-gray-800 mt-1">Pinned Mumbai Love Notes</h2>
+                    <p class="text-sm text-gray-500 mt-2">Words from readers across Mumbai who received custom Khan Journ's pieces.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Note 1 -->
+                    <div class="bg-[#FFFDF6] p-6 rounded-2xl border border-amber-100 shadow-polaroid relative transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-5 washi-tape-pink rounded-sm"></div>
+                        <div class="flex text-amber-400 mb-3">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-gray-700 text-sm leading-relaxed italic">
+                            "The pressed flower bookmark with my sister’s name in gold calligraphy was beyond gorgeous! Hand-delivered here in Bandra on time. The quality of resin is crystal clear."
+                        </p>
+                        <div class="mt-4 pt-3 border-t border-amber-100/60 flex items-center justify-between">
+                            <span class="font-handwriting text-lg font-bold text-gray-800">~ Riya M., Bandra</span>
+                            <span class="text-[11px] text-gray-400">Floral Bookmark</span>
+                        </div>
+                    </div>
+
+                    <!-- Note 2 -->
+                    <div class="bg-[#FBF8FF] p-6 rounded-2xl border border-purple-100 shadow-polaroid relative transform rotate-2 hover:rotate-0 transition-transform duration-300">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-5 washi-tape-lavender rounded-sm"></div>
+                        <div class="flex text-amber-400 mb-3">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-gray-700 text-sm leading-relaxed italic">
+                            "I ordered a vintage journal for my poetry notes. The tea-dyed aesthetic, the wax stamp on wrapping, and the silk ribbon made me feel so special. So glad she's local in Mumbai!"
+                        </p>
+                        <div class="mt-4 pt-3 border-t border-purple-100/60 flex items-center justify-between">
+                            <span class="font-handwriting text-lg font-bold text-gray-800">~ Ananya P., Colaba</span>
+                            <span class="text-[11px] text-gray-400">Antique Journal</span>
+                        </div>
+                    </div>
+
+                    <!-- Note 3 -->
+                    <div class="bg-[#FFF8F8] p-6 rounded-2xl border border-rose-100 shadow-polaroid relative transform -rotate-2 hover:rotate-0 transition-transform duration-300">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-5 washi-tape-cream rounded-sm"></div>
+                        <div class="flex text-amber-400 mb-3">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-gray-700 text-sm leading-relaxed italic">
+                            "Very responsive on WhatsApp +91 7977339727! Accommodated my favorite blue hydrangeas perfectly and delivered to Powai within 3 days."
+                        </p>
+                        <div class="mt-4 pt-3 border-t border-rose-100/60 flex items-center justify-between">
+                            <span class="font-handwriting text-lg font-bold text-gray-800">~ Sneha K., Powai</span>
+                            <span class="text-[11px] text-gray-400">Custom Hydrangea Kit</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white border-t border-pink-100 pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-pink-100">
+                
+                <!-- Brand Bio -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blush-100 flex items-center justify-center text-blush-500">
+                            <i data-lucide="bookmark" class="w-5 h-5 fill-blush-300"></i>
+                        </div>
+                        <span class="font-serif text-2xl font-bold text-gray-800">Khan Journ<span class="text-blush-500 font-normal">'s</span></span>
+                    </div>
+                    <p class="text-sm text-gray-600 max-w-md leading-relaxed">
+                        A cozy handmade studio celebrating the beauty of literature, pressed botanicals, and warm handcrafted keepsakes. <strong>Proudly handcrafted & delivered only in Mumbai</strong>.
+                    </p>
+                    <p class="mt-4 text-xs font-handwriting text-2xl text-blush-500">
+                        "Turning quiet reading moments into works of art."
+                    </p>
+                </div>
+
+                <!-- Contact & Orders -->
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-gray-800 mb-4">Mumbai Orders & Custom Inquiries</h4>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li>
+                            <a href="tel:+917977339727" class="hover:text-blush-600 flex items-center gap-2">
+                                <i data-lucide="phone" class="w-4 h-4 text-blush-500"></i>
+                                <span>+91 7977339727</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://wa.me/917977339727" target="_blank" class="hover:text-emerald-600 flex items-center gap-2">
+                                <i data-lucide="message-circle" class="w-4 h-4 text-emerald-500"></i>
+                                <span>WhatsApp Orders Support</span>
+                            </a>
+                        </li>
+                        <li class="flex items-center gap-2 text-rose-600 font-medium">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-rose-500"></i>
+                            <span>Delivering Exclusively in Mumbai Area</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Hours & Info -->
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-gray-800 mb-4">Handcraft Studio</h4>
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        Every piece is customized on order. Bulk favors for weddings, book clubs & events in Mumbai accepted with 4-5 days notice.
+                    </p>
+                    <div class="mt-4 flex gap-3">
+                        <a href="https://wa.me/917977339727" target="_blank" class="w-9 h-9 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center hover:bg-emerald-100 transition-colors">
+                            <i data-lucide="message-square" class="w-4 h-4"></i>
+                        </a>
+                        <a href="tel:+917977339727" class="w-9 h-9 rounded-full bg-blush-50 text-blush-600 flex items-center justify-center hover:bg-blush-100 transition-colors">
+                            <i data-lucide="phone-outgoing" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#gallery" class="w-9 h-9 rounded-full bg-pink-50 text-pink-600 flex items-center justify-center hover:bg-pink-100 transition-colors">
+                            <i data-lucide="image" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-3">
+                <p>&copy; <span id="currentYear"></span> Khan Journ's. All rights reserved. Handcrafted with love.</p>
+                <p class="font-handwriting text-lg text-gray-500">Made for endless cozy reading nights ☕📖</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="productModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-blush-200 relative p-6 sm:p-8 animate-in fade-in zoom-in-95 duration-200">
+            <!-- Close Button -->
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-gray-100 text-gray-500 hover:bg-blush-100 hover:text-blush-600 flex items-center justify-center transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+                <div class="rounded-2xl overflow-hidden aspect-[16/10] sm:aspect-square bg-stone-950 shadow-inner flex items-center justify-center p-1">
+                    <img id="modalImg" src="" alt="Craft details" class="w-full h-full object-contain">
+                </div>
+                <div>
+                    <span id="modalCategory" class="text-[11px] font-bold uppercase tracking-wider text-blush-500 bg-blush-50 px-2.5 py-1 rounded-full"></span>
+                    <h3 id="modalTitle" class="font-serif text-2xl font-bold text-gray-800 mt-2"></h3>
+                    <p id="modalDesc" class="text-sm text-gray-600 mt-3 leading-relaxed"></p>
+
+                    <div class="mt-4 space-y-2 text-xs text-gray-600 border-t border-b border-pink-100 py-3">
+                        <p><strong>🌸 Materials:</strong> <span id="modalMaterials"></span></p>
+                        <p><strong>📐 Dimensions:</strong> <span id="modalDimensions"></span></p>
+                        <p><strong>✍️ Personalization:</strong> <span id="modalOptions"></span></p>
+                    </div>
+
+                    <div class="mt-6 flex flex-col gap-2.5">
+                        <button id="modalEnquireBtn" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-sm hover:from-emerald-600 hover:to-teal-700 transition-all">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                            Enquire About This on WhatsApp
+                        </button>
+                        <button onclick="fillFormFromModal()" class="w-full py-3 px-4 rounded-xl bg-blush-50 text-blush-600 hover:bg-blush-100 text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-2">
+                            <i data-lucide="pen-tool" class="w-4 h-4"></i>
+                            Customize in Order Form Below
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="previewModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-blush-200 p-6 relative">
+            <button onclick="closePreviewModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 flex items-center justify-center">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+
+            <div class="text-center mb-4">
+                <div class="w-12 h-12 rounded-full bg-blush-100 text-blush-500 flex items-center justify-center mx-auto mb-2">
+                    <i data-lucide="clipboard-check" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-gray-800">Your Custom Enquiry Summary</h3>
+                <p class="text-xs text-gray-500">Ready to send directly to Khan Journ's (+91 7977339727)</p>
+            </div>
+
+            <div id="previewContent" class="bg-petal/30 p-4 rounded-xl text-xs space-y-2 text-gray-700 font-mono border border-blush-100">
+                <!-- Filled dynamically -->
+            </div>
+
+            <div class="mt-6 flex gap-3">
+                <button onclick="closePreviewModal()" class="w-1/2 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-xs font-semibold hover:bg-gray-50">
+                    Edit Details
+                </button>
+                <button onclick="sendDirectWhatsApp()" class="w-1/2 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-semibold flex items-center justify-center gap-1.5 shadow-sm">
+                    <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                    Send to WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2 group">
+        <a href="https://wa.me/917977339727?text=Hi%20Khan%20Journ's!%20I%20am%20from%20Mumbai%20and%20want%20to%20discuss%20a%20custom%20order." 
+           target="_blank"
+           class="flex items-center gap-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-3 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all">
+            <i data-lucide="message-circle" class="w-5 h-5 fill-current"></i>
+            <span class="text-xs font-bold tracking-wide hidden sm:inline">WhatsApp Mumbai: +91 7977339727</span>
+        </a>
+    </div>
+
+    <script>
+        // Set dynamic year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Typewriter Effect Configuration
+        const typewriterWords = [
+            "Handmade Keepsakes 🌸",
+            "Pressed Floral Bookmarks ✨",
+            "Aesthetic Junk Journals 📖",
+            "Personalized Mumbai Gifts 🎁",
+            "Vintage Botanical Art 🌿"
+        ];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterEl = document.getElementById('typewriterText');
+
+        function typeLoop() {
+            const currentWord = typewriterWords[wordIndex];
+            
+            if (isDeleting) {
+                typewriterEl.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typewriterEl.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 1800; // Pause at end of word
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % typewriterWords.length;
+                typeSpeed = 400; // Pause before new word
+            }
+
+            setTimeout(typeLoop, typeSpeed);
+        }
+
+        // Entrance modal dismissal & petal shower animation trigger
+        function dismissEntranceModal() {
+            const modal = document.getElementById('entranceModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                modal.remove();
+            }, 500);
+            createPetalShower();
+        }
+
+        // Floating floral petal entrance particles
+        function createPetalShower() {
+            const petalIcons = ['🌸', '✨', '🌺', '🍃', '💐'];
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.className = 'petal-particle';
+                    petal.textContent = petalIcons[Math.floor(Math.random() * petalIcons.length)];
+                    petal.style.left = Math.random() * 95 + 'vw';
+                    petal.style.fontSize = (Math.random() * 14 + 14) + 'px';
+                    petal.style.animationDuration = (Math.random() * 2.5 + 2.5) + 's';
+                    document.body.appendChild(petal);
+
+                    setTimeout(() => petal.remove(), 5000);
+                }, i * 120);
+            }
+        }
+
+        // Craft items showcase catalog
+        const craftsData = [
+            {
+                id: 'craft-1',
+                title: 'Pastel Florals & Butterfly Ribbon Set',
+                category: 'bookmarks',
+                categoryLabel: 'Aesthetic Bookmarks',
+                image: 'images/1.png',
+                likes: 248,
+                desc: 'Handmade collage bookmarks with uplifting affirmations ("Stop Underestimating Yourself", "Smile Looks Gorgeous On You", "Just Keep Going"), dried floral accents, monarch butterflies, and soft satin ribbons.',
+                materials: 'Heavy Cardstock, Kraft Paper Layering, Satin Silk Ribbons, Water-resistant Lamination',
+                dimensions: '15 cm × 5 cm each (Set of 5)',
+                options: 'Pick individual bookmarks or the entire 5-piece boxed set.'
+            },
+            {
+                id: 'craft-2',
+                title: 'Vintage Paris & Botanical Wanderlust Collection',
+                category: 'bookmarks',
+                categoryLabel: 'Vintage Bookmarks',
+                image: 'images/2.png',
+                likes: 312,
+                desc: 'Dreamy French aesthetic bookmarks featuring the Eiffel Tower, archival window frames, vintage postal stamps, Monarch and Blue Morpho butterflies with velvet cords.',
+                materials: 'Textured Linen Paper, French Ephemera, Vintage Stamps, Deep Violet & Ruby Ties',
+                dimensions: '15.5 cm × 5 cm each',
+                options: 'Custom calligraphy city name or initials available.'
+            },
+            {
+                id: 'craft-3',
+                title: 'Midnight Blossom & Gothic Window Series',
+                category: 'bookmarks',
+                categoryLabel: 'Mood & Gothic',
+                image: 'images/3.png',
+                likes: 195,
+                desc: 'Moody gothic aesthetic bookmarks with cathedral stained glass archways, night skies, neon mountainscapes, and deep peony blooms with torn deckle paper edges.',
+                materials: 'Matte Laminated Cardstock, Night Sky Foil, Archival Cotton Paper',
+                dimensions: '15 cm × 5 cm each',
+                options: 'Available with black velvet ribbon or gold eyelet tassel.'
+            },
+            {
+                id: 'craft-4',
+                title: 'Retro Ochre & Nostalgia Collage Bookmark Set',
+                category: 'bookmarks',
+                categoryLabel: 'Retro Collage',
+                image: 'images/4.png',
+                likes: 174,
+                desc: 'Warm honey ochre and cobalt collage with vintage camera cutouts, antique newspaper clippings, sweet honey jars, and motivating typewriter quotes.',
+                materials: 'Kraft Card, Botanical Illustrations, Vintage Typography Prints',
+                dimensions: '15 cm × 5 cm each',
+                options: 'Custom quotes can be printed in classic typewriter typeface.'
+            },
+            {
+                id: 'craft-5',
+                title: 'The Dark Knight & Spidey Comic Strip Edition',
+                category: 'charms',
+                categoryLabel: 'Superheroes & Comics',
+                image: 'images/5.png',
+                likes: 382,
+                desc: 'Aesthetic comic book bookmarks featuring Batman and Spider-Man with vintage monochrome newsprint textures, Bat-signals, and bold graphic text.',
+                materials: 'Heavy Weight Matte Stock, Grayscale Newspaper Cutouts, Eyelet Punched',
+                dimensions: '15 cm × 5 cm each',
+                options: 'Choice of hero motif and custom comic quote.'
+            },
+            {
+                id: 'craft-6',
+                title: 'Demon Slayer & Spidey Pop Culture Trio',
+                category: 'bookmarks',
+                categoryLabel: 'Anime & Manga',
+                image: 'images/6.png',
+                likes: 420,
+                desc: 'Special edition Demon Slayer (Tanjiro, Zenitsu, Muichiro) montage bookmark alongside Spider-Man street art and French floral archway bookmarks.',
+                materials: 'High-res Anime Art Card, Weathered Paper Borders, Red Thread Ribbon',
+                dimensions: 'Fold-out bookmark panel & tall tags',
+                options: 'Available for customized anime characters upon request.'
+            }
+        ];
+
+        // Currently selected modal product
+        let activeProduct = null;
+
+        // Render Gallery items
+        function renderGallery(items) {
+            const container = document.getElementById('craftGallery');
+            container.innerHTML = '';
+
+            items.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-3 rounded-2xl border border-blush-100 shadow-craft hover:shadow-polaroid transition-all duration-300 flex flex-col group";
+                
+                // Alternating scrapbook tilt
+                const rotAngle = (index % 3 === 0) ? '-1' : (index % 3 === 1 ? '1' : '0');
+                card.style.transform = `rotate(${rotAngle}deg)`;
+                card.addEventListener('mouseenter', () => card.style.transform = 'rotate(0deg) translateY(-4px)');
+                card.addEventListener('mouseleave', () => card.style.transform = `rotate(${rotAngle}deg) translateY(0)`);
+
+                card.innerHTML = `
+                    <div class="relative overflow-hidden rounded-xl aspect-[16/10] bg-stone-950 flex items-center justify-center cursor-pointer group/img" onclick="openProductModal('${item.id}')">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" onerror="this.src='https://placehold.co/600x375/1a1a1a/f74676?text=Khan+Journ+Craft'">
+                        <div class="absolute top-2.5 left-2.5">
+                            <span class="text-[10px] font-bold uppercase tracking-wider bg-white/90 backdrop-blur text-blush-600 px-2 py-0.5 rounded-full border border-blush-200 shadow-sm">
+                                ${item.categoryLabel}
+                            </span>
+                        </div>
+                        <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                            <span class="px-3.5 py-1.5 rounded-full bg-white/95 text-xs font-semibold text-gray-800 shadow-md flex items-center gap-1.5">
+                                <i data-lucide="eye" class="w-3.5 h-3.5 text-blush-500"></i> View Details
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 pb-1 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-base font-bold text-gray-800 leading-snug line-clamp-1 cursor-pointer hover:text-blush-500" onclick="openProductModal('${item.id}')">
+                                ${item.title}
+                            </h3>
+                            <p class="text-xs text-gray-500 mt-1 line-clamp-2 leading-relaxed font-light">
+                                ${item.desc}
+                            </p>
+                        </div>
+
+                        <div class="mt-4 pt-2.5 border-t border-pink-50 flex items-center justify-between">
+                            <!-- Interactive heart like counter -->
+                            <button onclick="toggleLike(this, '${item.id}')" class="flex items-center gap-1 text-xs text-gray-500 hover:text-rose-500 transition-colors p-1 -ml-1">
+                                <i data-lucide="heart" class="w-4 h-4 like-icon"></i>
+                                <span class="like-count font-mono text-[11px]">${item.likes}</span>
+                            </button>
+
+                            <!-- Direct WhatsApp Inquiry Button (Mumbai Focused) -->
+                            <a href="https://wa.me/917977339727?text=Hi%20Khan%20Journ's!%20I%20am%20from%20Mumbai%20and%20interested%20in%20'${encodeURIComponent(item.title)}'.%20Can%20you%20share%20pricing%20and%20delivery%20details?" 
+                               target="_blank"
+                               class="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1.5 rounded-full bg-blush-50 text-blush-600 hover:bg-blush-500 hover:text-white transition-all">
+                                <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                                <span>Enquire</span>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+
+        // Filter functionality
+        function filterGallery(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                if (btn.dataset.category === category) {
+                    btn.className = "filter-btn active-filter px-4 py-2 rounded-full transition-all border border-blush-400 bg-blush-400 text-white shadow-sm";
+                } else {
+                    btn.className = "filter-btn px-4 py-2 rounded-full transition-all border border-pink-200 bg-white text-gray-600 hover:border-blush-300";
+                }
+            });
+
+            if (category === 'all') {
+                renderGallery(craftsData);
+            } else {
+                const filtered = craftsData.filter(item => item.category === category);
+                renderGallery(filtered);
+            }
+        }
+
+        // Like button toggle
+        function toggleLike(btn, id) {
+            const icon = btn.querySelector('.like-icon');
+            const countSpan = btn.querySelector('.like-count');
+            let currentLikes = parseInt(countSpan.textContent);
+
+            if (btn.classList.contains('liked')) {
+                btn.classList.remove('liked', 'text-rose-600');
+                btn.classList.add('text-gray-500');
+                icon.classList.remove('fill-current', 'text-rose-500');
+                countSpan.textContent = currentLikes - 1;
+            } else {
+                btn.classList.add('liked', 'text-rose-600');
+                btn.classList.remove('text-gray-500');
+                icon.classList.add('fill-current', 'text-rose-500');
+                countSpan.textContent = currentLikes + 1;
+            }
+        }
+
+        // Modal handler
+        function openProductModal(id) {
+            const item = craftsData.find(c => c.id === id);
+            if (!item) return;
+            activeProduct = item;
+
+            document.getElementById('modalImg').src = item.image;
+            document.getElementById('modalCategory').textContent = item.categoryLabel;
+            document.getElementById('modalTitle').textContent = item.title;
+            document.getElementById('modalDesc').textContent = item.desc;
+            document.getElementById('modalMaterials').textContent = item.materials;
+            document.getElementById('modalDimensions').textContent = item.dimensions;
+            document.getElementById('modalOptions').textContent = item.options;
+
+            const enquireBtn = document.getElementById('modalEnquireBtn');
+            enquireBtn.onclick = () => {
+                const url = `https://wa.me/917977339727?text=Hi%20Khan%20Journ's!%20I%20am%20from%20Mumbai%20and%20enquiring%20about%20'${encodeURIComponent(item.title)}'.%20I%20would%20love%20to%20know%20the%20price%20and%20how%20we%20can%20customize%20it!`;
+                window.open(url, '_blank');
+            };
+
+            const modal = document.getElementById('productModal');
+            modal.classList.remove('hidden');
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.add('hidden');
+        }
+
+        // Auto-fill form from selected modal
+        function fillFormFromModal() {
+            if (!activeProduct) return;
+            closeProductModal();
+
+            const craftSelect = document.getElementById('craftType');
+            if (activeProduct.category === 'bookmarks') {
+                craftSelect.value = "Pressed Floral Resin Bookmark";
+            } else if (activeProduct.category === 'journals') {
+                craftSelect.value = "Vintage Calligraphy Journal";
+            } else if (activeProduct.category === 'charms') {
+                craftSelect.value = "Resin Charm & Page Divider";
+            } else if (activeProduct.category === 'gifts') {
+                craftSelect.value = "Curated Bookish Gift Hamper";
+            } else {
+                craftSelect.value = "Other Custom Craft Idea";
+            }
+
+            document.getElementById('colorTheme').value = `Inspiration: ${activeProduct.title}`;
+            
+            const formElement = document.getElementById('inquiry');
+            formElement.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Handle inquiry form submit -> direct formatted WhatsApp URL
+        function handleInquirySubmit(e) {
+            e.preventDefault();
+            sendDirectWhatsApp();
+        }
+
+        // Format message for WhatsApp including Mumbai Locality
+        function buildWhatsAppMessage() {
+            const craftType = document.getElementById('craftType').value;
+            const colorTheme = document.getElementById('colorTheme').value || 'Open to artist suggestion';
+            const personalization = document.getElementById('personalizationText').value || 'None specified';
+            const area = document.getElementById('custArea').value || 'Mumbai';
+            const timeline = document.getElementById('deliveryTimeline').value || 'Flexible';
+            const notes = document.getElementById('orderNotes').value || 'None';
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+
+            const msg = `🌸 *New Mumbai Custom Enquiry - Khan Journ's*\n` +
+                        `------------------------------------\n` +
+                        `👤 *Name:* ${name}\n` +
+                        `📞 *Phone:* ${phone}\n` +
+                        `📍 *Mumbai Locality:* ${area}\n` +
+                        `⏳ *Needed By:* ${timeline}\n` +
+                        `🔖 *Craft Type:* ${craftType}\n` +
+                        `🎨 *Colors/Theme:* ${colorTheme}\n` +
+                        `✍️ *Personalization/Name:* ${personalization}\n` +
+                        `📝 *Notes:* ${notes}\n` +
+                        `------------------------------------\n` +
+                        `✨ *Sent via Khan Journ's Mumbai Showcase*`;
+
+            return msg;
+        }
+
+        function sendDirectWhatsApp() {
+            const nameInput = document.getElementById('custName');
+            const phoneInput = document.getElementById('custPhone');
+            const areaInput = document.getElementById('custArea');
+
+            if (!nameInput.value.trim() || !phoneInput.value.trim() || !areaInput.value.trim()) {
+                document.getElementById('inquiry').scrollIntoView({ behavior: 'smooth' });
+                if (!nameInput.value.trim()) nameInput.focus();
+                else if (!phoneInput.value.trim()) phoneInput.focus();
+                else areaInput.focus();
+                return;
+            }
+
+            const rawText = buildWhatsAppMessage();
+            const encodedText = encodeURIComponent(rawText);
+            const whatsappUrl = `https://wa.me/917977339727?text=${encodedText}`;
+            window.open(whatsappUrl, '_blank');
+            closePreviewModal();
+        }
+
+        // Preview Modal Logic
+        function previewAndConfirmModal() {
+            const craftType = document.getElementById('craftType').value;
+            const colorTheme = document.getElementById('colorTheme').value || 'Open to suggestion';
+            const personalization = document.getElementById('personalizationText').value || 'None';
+            const area = document.getElementById('custArea').value || 'Mumbai';
+            const timeline = document.getElementById('deliveryTimeline').value || 'Standard';
+            const notes = document.getElementById('orderNotes').value || 'None';
+            const name = document.getElementById('custName').value || 'Guest';
+            const phone = document.getElementById('custPhone').value || 'Not provided yet';
+
+            const summaryHtml = `
+                <div><span class="text-blush-600 font-semibold">Name:</span> ${name}</div>
+                <div><span class="text-blush-600 font-semibold">Phone:</span> ${phone}</div>
+                <div><span class="text-blush-600 font-semibold">Mumbai Area:</span> ${area}</div>
+                <div><span class="text-blush-600 font-semibold">Timeline:</span> ${timeline}</div>
+                <div><span class="text-blush-600 font-semibold">Item:</span> ${craftType}</div>
+                <div><span class="text-blush-600 font-semibold">Theme:</span> ${colorTheme}</div>
+                <div><span class="text-blush-600 font-semibold">Custom Text:</span> ${personalization}</div>
+                <div><span class="text-blush-600 font-semibold">Notes:</span> ${notes}</div>
+            `;
+
+            document.getElementById('previewContent').innerHTML = summaryHtml;
+            document.getElementById('previewModal').classList.remove('hidden');
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function closePreviewModal() {
+            document.getElementById('previewModal').classList.add('hidden');
+        }
+
+        // Close modals on clicking backdrop
+        window.addEventListener('click', (e) => {
+            const pModal = document.getElementById('productModal');
+            const prModal = document.getElementById('previewModal');
+            if (e.target === pModal) closeProductModal();
+            if (e.target === prModal) closePreviewModal();
+        });
+
+        // Mobile Navigation Drawer Toggle Handler
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('hamburgerIcon');
+            const isHidden = menu.classList.contains('hidden');
+
+            if (isHidden) {
+                menu.classList.remove('hidden');
+                icon.setAttribute('data-lucide', 'x');
+            } else {
+                menu.classList.add('hidden');
+                icon.setAttribute('data-lucide', 'menu');
+            }
+
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('hamburgerIcon');
+            if (menu) {
+                menu.classList.add('hidden');
+            }
+            if (icon) {
+                icon.setAttribute('data-lucide', 'menu');
+            }
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+
+        // Initialize display and start typewriter loop
+        window.addEventListener('DOMContentLoaded', () => {
+            renderGallery(craftsData);
+            typeLoop();
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>
